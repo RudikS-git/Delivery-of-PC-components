@@ -1,0 +1,42 @@
+﻿.create-accessories__container {
+    display: flex;
+    max-width: 800px;
+}
+
+.create-accessories__outer {
+    list-style-type: none;
+    border: 1px solid #eae8e8c4;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.create-accessories__outer li {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em;
+}
+
+.create-accessories__outer li label{
+    padding: .5em 1em .5em 0;
+    flex: 1 0 120px;
+    max-width: 220px;
+}
+
+.create-accessories__outer li > input, select {
+    flex: 2;
+    border-radius: 5px;
+}
+
+.create-accessories__outer li > select {
+    height: 40px;
+}
+
+.create-accessories__outer li > input[type="submit"] {
+    padding: .5em;
+    background-color: #eae8e8c4;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    margin-left: auto;
+    flex: 0;
+    
+}

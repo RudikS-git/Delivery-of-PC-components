@@ -1,0 +1,246 @@
+﻿@page
+@model CreateAccessoriesModel
+@{
+    ViewData["Title"] = "Добавление комплектующего";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="create-accessories__container">
+    <form method="post" asp-page-handler="AddAccessories">
+        <ul class="create-accessories__outer">
+            <li class="create-accessories__form-row">
+                <label>Выбор типа комплектующего</label>
+                <select asp-for="TypeAccessoriesId">
+                    <option value="0">Процессор</option>
+                    <option value="1">Материнская плата</option>
+                    <option value="2">Видеокарта</option>
+                    <option value="3">Оперативная память</option>
+                    <option value="4">Блок питания</option>
+                    <option value="5">Корпус</option>
+                    <option value="6">Жесткий диск</option>
+                    <option value="7">SSD M2</option>
+                    <option value="8">SSD SATA</option>
+                    <option value="9">Вентилятор</option>
+                    <option value="10">Куллер</option>
+                    <option value="11">Жидкостное охлаждение</option>
+                    <option value="12">Звуковая карта</option>
+                    <option value="13">Оптический привод</option>
+                    <option value="14">Плата видеозахвата</option>
+                </select>
+            </li>
+
+            <li class="create-accessories__form-row">
+                <input type="submit" value="Создать" />
+            </li>
+        </ul>
+
+    </form>
+
+    <form method="post" asp-page-handler="DeleteFeature">
+        <ul class="create-accessories__outer">
+            <li class="create-accessories__form-row">
+                <label>Список существующих комплектующих</label>
+                <select asp-for="Belong.AccessoryId">
+
+                    @foreach(var it in Model.AccessoriesType)
+                    {
+                    <optgroup label=@it.Name>
+                        @foreach (var accessories in Model.Accessories)
+                        {
+                            if (accessories.AccessoryTypeId == it.Id)
+                            {
+                                <option value=@accessories.AccessoryTypeId>@accessories.AccessoryTypeId </option>
+                            }
+                        }
+
+                    </optgroup>
+                    }
+
+                   @* <optgroup label="Процессоры">
+                        @foreach (var it in Model.CPUs)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Материнские платы">
+                        @foreach (var it in Model.Motherboards)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Видеокарты">
+                        @foreach (var it in Model.GraphicsCards)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+
+                        }
+                    </optgroup>
+
+                    <optgroup label="Оперативная память">
+                        @foreach (var it in Model.RAMs)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Блоки питания">
+                        @foreach (var it in Model.PowerSupplies)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Корпусы">
+                        @foreach (var it in Model.Cases)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Жесткие диски">
+                        @foreach (var it in Model.HDDs)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="SSD M2">
+                        @foreach (var it in Model.ssdM2s)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="SSD SATA">
+                        @foreach (var it in Model.ssdSatas)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Вентиляторы">
+                        @foreach (var it in Model.Fans)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Куллеры">
+                        @foreach (var it in Model.Coolers)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Жидкостные охлаждения">
+                        @foreach (var it in Model.Liquids)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Звуковые карты">
+                        @foreach (var it in Model.SoundCards)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+
+                    <optgroup label="Оптические приводы">
+                        @foreach (var it in Model.OpticalDrives)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>
+
+                    <optgroup label="Карты видеозахвата">
+                        @foreach (var it in Model.CaptureBoards)
+                        {
+                            <option value=@it.Id>@it.Id</option>
+                        }
+                    </optgroup>*@
+
+                </select>
+            </li>
+
+            <li class="create-accessories__form-row">
+                <input type="submit" value="Удалить" />
+            </li>
+        </ul>
+
+</form>
+
+    <form method="post" asp-page-handler="AddFeature">
+        <ul class="create-accessories__outer">
+            <li class="create-accessories__form-row">
+                <label>Список существующих комплектующих</label>
+                <select asp-for="Belong.AccessoryId">
+
+                    @foreach (var it in Model.AccessoriesType)
+                    {
+                        <optgroup label=@it.Name>
+                            @foreach (var accessories in Model.Accessories)
+                            {
+                                if (accessories.AccessoryTypeId == it.Id)
+                                {
+                                    <option value=@accessories.AccessoryTypeId>@accessories.AccessoryTypeId </option>
+                                }
+                            }
+
+                        </optgroup>
+                    }
+
+                </select>
+            </li>
+
+            <li class="create-accessories__form-row">
+                <label>Выбор хар-ки комплектующего</label>
+                <select asp-for="Belong.FeatureId">
+
+                    <optgroup label="Описание товара">
+                        @foreach (var item in Model.features)
+                        {
+                            if (item.FeatureGroupId == null)
+                            {
+                                <option value=@item.Id>@item.Name</option>
+                            }
+                        }
+                    </optgroup>
+
+                    @foreach (var it in Model.featureGroups)
+                    {
+                        <optgroup label=@it.Name>
+                            @foreach (var item in Model.features)
+                            {
+                                if (item.FeatureGroupId == it.Id)
+                                {
+                                    <option value=@item.Id>@item.Name</option>
+                                }
+                            }
+                        </optgroup>
+                    }
+
+                </select>
+            </li>
+
+            <li class="create-accessories__form-row">
+                <label>Значение комплектующего</label>
+                <input asp-for="Belong.Value" />
+            </li>
+
+            <li class="create-accessories__form-row">
+                <label>Единица измерения</label>
+                <input asp-for="Belong.Dimension" />
+            </li>
+
+            <li class="create-accessories__form-row">
+                <input type="submit" value="Добавить" />
+            </li>
+        </ul>
+
+    </form>
+</div>
+

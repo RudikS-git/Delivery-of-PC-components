@@ -1,0 +1,92 @@
+﻿@page
+@model CourseWorkDataBase.Pages.OrderModel
+@{
+}
+
+<div>
+    <h1>Оформление заказа</h1>
+
+    <div class="order__container">
+
+        <form method="post">
+            <ul class="order__outer">
+
+                <li>
+                    <label>Количество</label>
+                    <input asp-for="Order.Count" type="number" />
+                </li>
+
+                <li>
+                    <input asp-for="Order.AccessoryId" value=@Model.AccessoryId type="hidden" />
+                </li>
+
+                <li>
+                    <label>Имя</label>
+                    <input asp-for="Client.Name" />
+                </li>
+
+                <li>
+                    <label>Фамилия</label>
+                    <input asp-for="Client.Surname" />
+                </li>
+
+                <li>
+                    <label>Отчество</label>
+                    <input asp-for="Client.Patronymic" />
+                </li>
+
+                <li>
+                    <label>Номер телефона</label>
+                    <input asp-for="Client.NumberPhone" />
+                </li>
+
+                <li>
+                    <select class="order-select" asp-for="Order.MethodOfObtaiting">
+                        <option value=0>Самовывоз</option>
+                        <option value=1 selected>Доставка</option>
+                    </select>
+                </li>
+
+
+                <li class="order__delivery-info">
+                    <ul>
+                        <li class="">
+                            <label>Регион</label>
+                            <input asp-for="Client.Region" />
+                        </li>
+
+                        <li class="">
+                            <label>Город</label>
+                            <input asp-for="Client.City" />
+                        </li>
+
+                        <li class="">
+                            <label>Адрес</label>
+                            <input asp-for="Client.Address" />
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <input type="submit" value="Оформить" />
+                </li>
+            </ul>
+        </form>
+
+    </div>
+
+    <script type="text/javascript">
+        document.querySelector(".order-select").addEventListener("change", changeOrderHandler, false);
+
+        function changeOrderHandler(event) {
+            let order = document.querySelector(".order-select");
+
+            if (order.value == 0) { // самовывоз
+                document.querySelector(".order__delivery-info").classList.toggle("order__pickup");
+            }
+            else { // доставка
+                document.querySelector(".order__delivery-info").classList.remove("order__pickup");
+            }
+        }
+    </script>
+</div>

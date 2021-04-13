@@ -1,0 +1,38 @@
+﻿@page
+@model CourseWorkDataBase.Pages.AccessoriesModel
+@{
+}
+
+    <div class="accessories__container">
+
+        @foreach (var item in Model.asseccories)
+        {
+            var accesory = Model.belongs.Where(it => it.AccessoryId == item.Id);
+            var photo = accesory.Where(it => it.Feature.Name == "Фото").FirstOrDefault()?.Value;
+            var name = accesory.Where(it => it.Feature.Name == "Модель").FirstOrDefault()?.Value;
+            var price = accesory.Where(it => it.Feature.Name == "Цена").FirstOrDefault()?.Value;
+
+            if (photo == null || name == null || price == null)
+                continue;
+
+            <a asp-page="AccessoryInfo" asp-route-id=@item.Id>
+                <div class="accessories__item">
+                    <div class="accessories__content">
+                        <div>
+                            <img class="accessories__div-img" src=@photo />
+                        </div>
+
+                        <div>
+                            <span class="accessories__text">@name</span>
+                        </div>
+
+                        <div>
+                            <span class="accessories__text-price">@price  ₽</span>
+                        </div>
+                    </div>
+
+                </div>
+                </a>
+            }
+
+    </div>

@@ -1,0 +1,28 @@
+﻿.accessories__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.accessories__item {
+    border: #ddd solid;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.accessories__item:hover {
+    border: #4c77ee solid;
+    cursor: pointer;
+}
+
+.accessories__content {
+    padding: 15px;
+}
+
+.accessories__div-img {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.accessories__text {
+    color: #6a6a6a;
+}

@@ -1,0 +1,40 @@
+﻿@page
+@model CourseWorkDataBase.Pages.AccessoryInfoModel
+@{
+}
+
+<div>
+    <h1>Информация о комплектующем</h1>
+
+    <a asp-page="Order" asp-route-id=@Model.belongs[0].AccessoryId>Заказать</a>
+    @{ int? lastId = -1; }
+    
+    @foreach(var item in Model.belongs)
+    {
+        if(item.Feature.FeatureGroupId != null && lastId != item.Feature.FeatureGroupId)
+        {
+            lastId = item.Feature.FeatureGroupId;
+            <div>
+                <span class="accessoryinfo__text-group">@item.Feature.FeatureGroup.Name</span>
+            </div>
+        }
+
+        if (item.Feature.Name == "Фото")
+        {
+            <div>
+                <img src=@item.Value></img>
+            </div>
+        }
+        else
+        {
+            <div>
+                <span>@item.Feature.Name</span>
+                <span>@item.Value @item.Dimension</span>
+
+            </div>
+        }
+    }
+
+    
+
+</div>
